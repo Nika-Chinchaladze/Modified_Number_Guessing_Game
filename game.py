@@ -202,7 +202,7 @@ class Ui_Game_page(object):
             
             # Player will lose if Number of tries ar too high:
             critical_number = int(self.num_max_try.text())
-            if self.Counter == critical_number:
+            if self.Counter == (critical_number + 1):
                 self.message_label.setText(f'You Lose! Number Of Tries were Too High: {self.Counter}')
                 self.message_label.setStyleSheet("background-color: rgb(255, 35, 35);")
                 self.check_button.setEnabled(False)
