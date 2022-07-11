@@ -188,7 +188,7 @@ class Ui_Game_page(object):
                     self.message_label.setStyleSheet("QLabel" "{" "background : lightgreen;" "}")
                     self.check_button.setEnabled(False)
                     self.Msg_button.setEnabled(True)
-                elif self.Counter > int(self.num_min_try.text()) and self.Counter < int(self.num_max_try.text()):
+                elif self.Counter > int(self.num_min_try.text()) and self.Counter <= int(self.num_max_try.text()):
                     self.message_label.setText(f'Correct Guess! Congratulations You Won The Game In - {self.Counter} Try!')
                     self.message_label.setStyleSheet("background-color: rgb(170, 255, 255);")
                     self.check_button.setEnabled(False)
