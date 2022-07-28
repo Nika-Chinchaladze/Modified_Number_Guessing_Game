@@ -3,14 +3,40 @@ from PyQt5.QtWidgets import QMessageBox
 
 
 class Ui_Game_page(object):
+
+    def Play_Again(self):
+        from choose import Ui_Choose_page
+
+        self.window2big = QtWidgets.QMainWindow()
+        self.play = Ui_Choose_page()
+        self.play.setupUi(self.window2big)
+        self.window2big.show()
+
     def setupUi(self, Game_page):
         Game_page.setObjectName("Game_page")
-        Game_page.resize(380, 561)
+        Game_page.resize(380, 600)
         self.centralwidget = QtWidgets.QWidget(Game_page)
         self.centralwidget.setObjectName("centralwidget")
+
+        self.Msg_button = QtWidgets.QPushButton(self.centralwidget)
+        self.Msg_button.setGeometry(QtCore.QRect(10, 435, 359, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.Msg_button.setFont(font)
+        self.Msg_button.setStyleSheet("background-color: rgb(198, 198, 148);")
+        self.Msg_button.setObjectName("Msg_button")
+        self.Msg_button.setEnabled(False)
         
+        self.try_button = QtWidgets.QPushButton(self.centralwidget)
+        self.try_button.setGeometry(QtCore.QRect(10, 487, 359, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.try_button.setFont(font)
+        self.try_button.setStyleSheet("background-color: rgb(119, 240, 178);")
+        self.try_button.setObjectName("try_button")
+
         self.end_button = QtWidgets.QPushButton(self.centralwidget)
-        self.end_button.setGeometry(QtCore.QRect(10, 500, 359, 41))
+        self.end_button.setGeometry(QtCore.QRect(10, 537, 359, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.end_button.setFont(font)
@@ -125,7 +151,7 @@ class Ui_Game_page(object):
         self.instruction_label.setObjectName("instruction_label")
         
         self.Enter_Number_Place = QtWidgets.QLineEdit(self.centralwidget)
-        self.Enter_Number_Place.setGeometry(QtCore.QRect(10, 380, 151, 61))
+        self.Enter_Number_Place.setGeometry(QtCore.QRect(10, 380, 151, 45))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.Enter_Number_Place.setFont(font)
@@ -134,7 +160,7 @@ class Ui_Game_page(object):
         self.Enter_Number_Place.setObjectName("Enter_Number_Place")
         
         self.check_button = QtWidgets.QPushButton(self.centralwidget)
-        self.check_button.setGeometry(QtCore.QRect(214, 380, 155, 61))
+        self.check_button.setGeometry(QtCore.QRect(214, 380, 155, 45))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.check_button.setFont(font)
@@ -142,15 +168,6 @@ class Ui_Game_page(object):
         self.check_button.setObjectName("check_button")
         # from here we will be able to count clicks on check button = count player's tries:
         self.Counter = 0
-        
-        self.Msg_button = QtWidgets.QPushButton(self.centralwidget)
-        self.Msg_button.setGeometry(QtCore.QRect(10, 450, 359, 41))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.Msg_button.setFont(font)
-        self.Msg_button.setStyleSheet("background-color: rgb(198, 198, 148);")
-        self.Msg_button.setObjectName("Msg_button")
-        self.Msg_button.setEnabled(False)
         
         # define List of Entered Numbers, which will be displayed in the Message Box Window:
         self.Entered_Numbers_List = []
@@ -168,6 +185,8 @@ class Ui_Game_page(object):
         self.end_button.clicked.connect(Game_page.close)
         self.Msg_button.clicked.connect(self.show_box)
         self.check_button.clicked.connect(self.check_number)
+        self.try_button.clicked.connect(self.Play_Again)
+        self.try_button.clicked.connect(Game_page.close)
     
     # define method for check button:
     def check_number(self):
@@ -198,7 +217,7 @@ class Ui_Game_page(object):
                 self.message_label.setStyleSheet("background-color: rgb(234, 234, 116);")
             elif Entered_Number > random_number:
                 self.message_label.setText("Entered Number is Bigger, Reduce!")
-                self.message_label.setStyleSheet("background-color: rgb(234, 234, 116);")
+                self.message_label.setStyleSheet("background-color: rgb(200, 200, 200);")
             
             # Player will lose if Number of tries ar too high:
             critical_number = int(self.num_max_try.text())
@@ -227,6 +246,8 @@ class Ui_Game_page(object):
     def retranslateUi(self, Game_page):
         _translate = QtCore.QCoreApplication.translate
         Game_page.setWindowTitle(_translate("Game_page", "MainWindow"))
+        self.Msg_button.setText(_translate("Game_page", "Message Box"))
+        self.try_button.setText(_translate("Game_page", "Play Again"))
         self.end_button.setText(_translate("Game_page", "End The Game!"))
         self.min_try_label.setText(_translate("Game_page", "Min Tries To Win:"))
         self.current_tries_label.setText(_translate("Game_page", "Numbers of Current Tries:"))
@@ -234,7 +255,6 @@ class Ui_Game_page(object):
         self.range_label.setText(_translate("Game_page", "Range:"))
         self.instruction_label.setText(_translate("Game_page", "Enter The Number!"))
         self.check_button.setText(_translate("Game_page", "Check"))
-        self.Msg_button.setText(_translate("Game_page", "Message Box"))
         self.secret_label.setText(_translate("Game_page", ""))
 
 
